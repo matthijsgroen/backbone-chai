@@ -1,6 +1,10 @@
 
 _.extend window.chai.Assertion.prototype,
 
+  # Add 'when' around filters to attach
+  # a callback that listens to the indicated trigger
+  # After the when the callbacks are validated
+  # if they where fired
   trigger: (trigger) ->
     @when_actions ||= []
 
@@ -18,20 +22,15 @@ _.extend window.chai.Assertion.prototype,
           "expected to trigger #{trigger}",
           "expected not to trigger #{trigger}"
         context.negate = negate
-
     }
-
     this
 
   when: (val) ->
     @when_actions ||= []
 
     action.before?(this) for action in @when_actions
-
     val() # execute the 'when'
-
     action.after?(this) for action in @when_actions
-
     this
 
 
