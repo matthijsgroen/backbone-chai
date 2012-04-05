@@ -1,8 +1,10 @@
-= Backbone Chai
+Backbone Chai
+=============
 
 Some matchers to help testing backbone structures.
 
-== Triggers
+Triggers
+--------
 
   model.should.trigger("change").when -> model.set attribute: "value"
 
