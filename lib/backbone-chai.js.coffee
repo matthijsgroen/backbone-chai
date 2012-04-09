@@ -1,5 +1,7 @@
+#= require underscore
+#= require ./extend-chai
 
-_.extend window.chai.Assertion.prototype,
+window.backboneChai = chaiPlugin
 
   # Add 'when' around filters to attach
   # a callback that listens to the indicated trigger
