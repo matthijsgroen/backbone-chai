@@ -2,7 +2,7 @@
 #= require ./extend-chai
 
 sinonMessages = (spy, action, nonNegatedSuffix, always, args) ->
-  verbPhrase = if always then "alwawys have " else "have "
+  verbPhrase = if always then "always have " else "have "
   nonNegatedSuffix = nonNegatedSuffix || ""
 
   {
