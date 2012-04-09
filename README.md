@@ -24,8 +24,8 @@ Sinon
 
 Matchers have also been added for sinonjs. 
 
-  #= require sinon-chai
-  chai.use sinonChai
+    #= require sinon-chai
+    chai.use sinonChai
 
 These are not complete yet, see tests and code for details.
 
