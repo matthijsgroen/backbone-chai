@@ -35,11 +35,13 @@ window.backboneChai = chaiPlugin
     action.after?(this) for action in @when_actions
     this
 
-  route_to: (router, methodName) ->
+  route_to: (router, methodName, options = {}) ->
     current_history = Backbone.history
     Backbone.history = new Backbone.History
     spy = sinon.spy router, methodName
     router._bindRoutes()
+    if options.considering?
+      consideredRouter._bindRoutes() for consideredRouter in options.considering
     Backbone.history.options =
       root: '/'
     Backbone.history.loadUrl @obj
