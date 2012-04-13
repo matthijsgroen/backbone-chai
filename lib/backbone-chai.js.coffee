@@ -35,4 +35,18 @@ window.backboneChai = chaiPlugin
     action.after?(this) for action in @when_actions
     this
 
+  route_to: (router, methodName) ->
+    current_history = Backbone.history
+    Backbone.history = new Backbone.History
+    spy = sinon.spy router, methodName
+    router._bindRoutes()
+    Backbone.history.options =
+      root: '/'
+    Backbone.history.loadUrl @obj
+    Backbone.history = current_history
+    router[methodName].restore()
+
+    @assert spy.calledOnce,
+      "expected '#{@obj}' to route to #{methodName}",
+      "expected '#{@obj}' not to route to #{methodName}"
 
