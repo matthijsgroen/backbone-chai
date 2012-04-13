@@ -6,12 +6,12 @@ window.backboneChai = chaiPlugin
   # Verifies if the subject fires a trigger 'when' events happen
   #
   # Examples:
-  #   model.should.trigger("change").when -> model.set attribute: "value"
+  #   model.should.trigger("change", with: [model]).when -> model.set attribute: "value"
   #   model.should.not.trigger("change:thing").when -> model.set attribute: "value"
   #   model.should.trigger("change").and.not.trigger("change:thing").when -> model.set attribute: "value"
   #
   # @param trigger the trigger expected to be fired
-  trigger: (trigger) ->
+  trigger: (trigger, options = {}) ->
     @when_actions ||= []
 
     # Add a around filter to the when actions
@@ -30,6 +30,11 @@ window.backboneChai = chaiPlugin
         context.assert @callback.calledOnce,
           "expected to trigger #{trigger}",
           "expected not to trigger #{trigger}"
+
+        if options.with?
+          context.assert @callback.calledWith(options.with...),
+            "expected trigger to be called with #{chai.inspect options.with}, but was called with #{chai.inspect @callback.args[0]}.",
+            "expected trigger not to be called with #{chai.inspect options.with}, but was"
         context.negate = negate
     }
     this

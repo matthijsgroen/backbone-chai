@@ -12,7 +12,7 @@ Usage
 Triggers
 --------
 
-    model.should.trigger("change").when -> model.set attribute: "value"
+    model.should.trigger("change", with: [model]).when -> model.set attribute: "value"
 
 this can also be chained further:
 
