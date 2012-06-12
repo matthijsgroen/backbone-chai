@@ -21,7 +21,7 @@ window.backboneChai = chaiPlugin
       # set up the callback to trigger
       before: (context) ->
         @callback = sinon.spy()
-        context.obj.on trigger, @callback
+        context.__flags.object.on trigger, @callback
 
       # verify if our callback is triggered
       after: (context) ->
@@ -81,7 +81,7 @@ window.backboneChai = chaiPlugin
       root: '/'
 
     # fire our route to test
-    Backbone.history.loadUrl @obj
+    Backbone.history.loadUrl @__flags.object
 
     # set back our history. The spy should have our collected info now
     Backbone.history = current_history
@@ -90,8 +90,8 @@ window.backboneChai = chaiPlugin
 
     # now assert if everything went according to spec
     @assert spy.calledOnce,
-      "expected '#{@obj}' to route to #{methodName}",
-      "expected '#{@obj}' not to route to #{methodName}"
+      "expected '#{@__flags.object}' to route to #{methodName}",
+      "expected '#{@__flags.object}' not to route to #{methodName}"
 
     # verify arguments if they were provided
     if options.arguments?
