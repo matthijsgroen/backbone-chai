@@ -15,23 +15,23 @@ window.sinonChai = chaiPlugin {},
   called: ->
     scopeChaiChain this, {
       with: ->
-        messages = sinonMessages @obj, "been called with arguments %*", "%C", false, arguments
-        @assert @obj.calledWith(arguments...), messages.affirmative, messages.negative
+        messages = sinonMessages @__flags.object, "been called with arguments %*", "%C", false, arguments
+        @assert @__flags.object.calledWith(arguments...), messages.affirmative, messages.negative
         this
 
       before: (otherSpy) ->
-        messages = sinonMessages @obj, "been called before %1", "", false, [otherSpy.displayName]
-        @assert @obj.calledBefore(otherSpy), messages.affirmative, messages.negative
+        messages = sinonMessages @__flags.object, "been called before %1", "", false, [otherSpy.displayName]
+        @assert @__flags.object.calledBefore(otherSpy), messages.affirmative, messages.negative
         this
 
       after: (otherSpy) ->
-        messages = sinonMessages @obj, "been called before %1", "", false, [otherSpy.displayName]
-        @assert @obj.calledAfter(otherSpy), messages.affirmative, messages.negative
+        messages = sinonMessages @__flags.object, "been called before %1", "", false, [otherSpy.displayName]
+        @assert @__flags.object.calledAfter(otherSpy), messages.affirmative, messages.negative
         this
 
       exactly: (times) ->
-        messages = sinonMessages @obj, "been called exactly #{sinon.timesInWords(times)}", ", but it was called %c%C", false, []
-        @assert @obj.callCount == times, messages.affirmative, messages.negative
+        messages = sinonMessages @__flags.object, "been called exactly #{sinon.timesInWords(times)}", ", but it was called %c%C", false, []
+        @assert @__flags.object.callCount == times, messages.affirmative, messages.negative
         this
 
     }, {
@@ -44,7 +44,7 @@ window.sinonChai = chaiPlugin {},
 
   not_called: ->
     @negate = true
-    messages = sinonMessages @obj, "been called", " at least once, but it was never called", false, []
-    @assert @obj.called, messages.affirmative, messages.negative
+    messages = sinonMessages @__flags.object, "been called", " at least once, but it was never called", false, []
+    @assert @__flags.object.called, messages.affirmative, messages.negative
     this
 
